@@ -4,7 +4,7 @@ import "../lib/FontAwesome"
 
 export default function Services() {
     return (
-        <section className="services section">
+        <section id="services" className="services section">
             <Container>
                 <Row>
                     <Col>

@@ -11,6 +11,7 @@ import { getSingletonData, getCollectionData } from "../lib/api";
 export async function getServerSideProps() {
 	const websiteInformation = (await getSingletonData('website-information'))
 	const metaTags           = (await getSingletonData('meta-tags'))
+	const heroSection        = (await getSingletonData('hero-section'))
 
 	const data = {
 		siteName: websiteInformation.data["sitename"].value,
@@ -29,8 +30,18 @@ export async function getServerSideProps() {
 		ogType: metaTags.data["og-type"].value,
 	}
 
+	const heroSectionData = {
+		mainText: heroSection.data["main-text"].value,
+		secondaryText: heroSection.data["secondary-text"].value,
+		cvButton: heroSection.data["cv-button"].value,
+		cvButtonText: heroSection.data["cv-button-text"].value,
+		cvButtonLink: heroSection.data["cv-button-link"].value.url,
+		cvButtonLinkOpen: heroSection.data["cv-button-link"].value.target,
+		mainImage: heroSection.data["main-image"].value.full_path,
+	}
+
 	return {
-		props: { data, metaTagsData },
+		props: { data, metaTagsData, heroSectionData },
 	}
 }
 
@@ -38,12 +49,14 @@ export default class IndexPage extends React.Component {
     constructor({...pageProps}) {
         super()
         this.pageProps   = pageProps
+		this.hero        = this.pageProps.heroSectionData
     }
 
     render() {
+		console.log(this.hero)
         return (
 			<div>
-				<Hero></Hero>
+				<Hero data={this.hero}></Hero>
 				<Services></Services>
 				<AboutMe></AboutMe>
 				<YoutubeChannel></YoutubeChannel>

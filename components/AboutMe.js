@@ -9,7 +9,7 @@ export default function AboutMe() {
     const myAge    = fullYear - 1992;
 
     return (
-        <section className="about-us section">
+        <section id="about" className="about-us section">
             <Container>
                 <Row>
                     <Col lg={6}>

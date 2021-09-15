@@ -3,7 +3,7 @@ import { Container, Row, Col, Badge } from 'react-bootstrap'
 
 export default function Portfolios() {
     return (
-        <div className="latest-news-area section">
+        <div id="portfolios" className="latest-news-area section">
             <Container>
                 <Row>
                     <Col>

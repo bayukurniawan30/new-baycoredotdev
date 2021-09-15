@@ -1476,6 +1476,7 @@ ol {
   padding: 30px 0;
   position: relative;
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
