@@ -3,9 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Row, Col } from 'react-bootstrap'
 import "../lib/FontAwesome"
 
-export default function Footer() {
+export default function Footer({...pageProps}) {
     const d        = new Date();
     const fullYear = d.getFullYear();
+
+    const copyright  = pageProps.data.copyrightText
+    const injectYear = copyright.replace("{year}", fullYear)
+
+    const phone   = pageProps.phone
+    const waPhone = phone.replace("+", "")
 
     return (
         <footer className="footer">
@@ -17,27 +23,26 @@ export default function Footer() {
                                 <div className="logo">
                                     <a href="index.html">
                                         <Image
-                                            src="/img/logo-white.png"
-                                            alt="Logo"
+                                            src={pageProps.data.logo}
+                                            alt="baycore.dev"
                                             width={230}
                                             height={45}
                                         />
                                     </a>
                                 </div>
-                                <p>Start building your website with me and get the awesome website.<br />Get in touch with me.</p>
+                                <div dangerouslySetInnerHTML={{ __html: pageProps.data.description }}></div>
                                 <div className="footer-social">
                                     <ul>
-                                        <li><a href="https://github.com/bayukurniawan30" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} size="sm" /></a></li>
-                                        <li><a href="https://www.youtube.com/channel/UCFOwJEF1e2zyWBgKuTKVePA" target="_blank"><FontAwesomeIcon icon={['fab', 'youtube']} size="sm" /></a></li>
-                                        <li><a href="https://www.facebook.com/bay.coretech/" target="_blank"><FontAwesomeIcon icon={['fab', 'facebook']} size="sm" /></a></li>
-                                        <li><a href="https://www.instagram.com/baycore/" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']} size="sm" /></a></li>
+                                        {pageProps.sosmed.map((sosmed) => (
+                                            <li key={sosmed.name.value.replace(/\s/g, '_')}><a href={sosmed.link.value.url} target="_blank"><FontAwesomeIcon icon={[sosmed.font_awesome_type.value, sosmed.font_awesome_icon.value]} size="sm" /></a></li>
+                                        ))}
                                     </ul>
                                 </div>
                             </div>
                         </Col>
                         <Col lg={3} md={4}>
                             <div className="single-footer f-link">
-                                <h3>More Links</h3>
+                                <h3>{pageProps.data.secondColumnTitle}</h3>
                                 <ul>
                                     <li><a href="#" target="_blank">Blog</a></li>
                                     <li><a href="https://host.codewithbaycore.dev" target="_blank">Host.cwb</a></li>
@@ -46,10 +51,10 @@ export default function Footer() {
                         </Col>
                         <Col lg={3} md={4}>
                             <div className="single-footer f-link">
-                                <h3>Contact Me</h3>
+                                <h3>{pageProps.data.thirdColumnTitle}</h3>
                                 <ul>
-                                    <li><a href="mailto:bayukurniawan@baycore.dev">bayukurniawan@baycore.dev</a></li>
-                                    <li><a href="https://wa.me/6285737309066">+6285737309066</a></li>
+                                    <li><a href={`mailto:${pageProps.email}`}>{pageProps.email}</a></li>
+                                    <li><a href={`https://wa.me/${waPhone}`}>{pageProps.phone}</a></li>
                                 </ul>
                             </div>
                         </Col>
@@ -62,7 +67,7 @@ export default function Footer() {
                         <Row>
                             <Col>
                                 <div className="left">
-                                    <p>&copy; {fullYear} <a href="https://baycore.dev">Baycore.dev</a>. All Rights Reserved</p>
+                                    <p dangerouslySetInnerHTML={{ __html: injectYear }}></p>
                                 </div>
                             </Col>
                         </Row>

@@ -7,7 +7,7 @@ export default function Layout({children, ...pageProps}) {
         <div>
             <Head>
                 <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
-                <meta name="author" content />
+                <meta name="author" content="Bayu Kurniawan" />
                 <meta name="description" content={pageProps.data.description} />
                 <meta name="keywords" content />
                 <meta name='application-name' content={pageProps.metaTagsData.applicationName} />
@@ -53,7 +53,7 @@ export default function Layout({children, ...pageProps}) {
 
             {children}
 
-            <Footer></Footer>
+            <Footer data={pageProps.footerData} phone={pageProps.contactSectionData.phone} email={pageProps.contactSectionData.email} sosmed={pageProps.socialMediaData.socialMedia}></Footer>
         </div>
     );
 }

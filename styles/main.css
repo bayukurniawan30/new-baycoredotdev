@@ -2521,6 +2521,10 @@ ol {
   font-weight: 500;
 }
 
+.about-tab p {
+  margin-top: 10px;
+}
+
 /*=============================
 	Pricing Table CSS
 ===============================*/
@@ -2728,9 +2732,31 @@ ol {
 /*======================================
     Blog CSS
 ========================================*/
+.latest-news-area .single-news {
+  -webkit-box-shadow: 0 10px 30px rgb(111 111 111 / 25%);
+  box-shadow: 0 10px 30px rgb(111 111 111 / 25%);
+  border-radius: 5px;
+  margin-bottom: 40px;
+  transition: all 0.3s ease;
+}
+
+.latest-news-area .single-news:hover {
+  -webkit-box-shadow: 0 10px 30px rgb(111 111 111 / 40%);
+  box-shadow: 0 10px 30px rgb(111 111 111 / 40%);
+}
+
+.latest-news-area .single-news:hover .content-body .title a {
+  color: #a18cd1;
+}
+
+.latest-news-area .single-news .content-body {
+  padding: 0px 30px 15px;
+}
+
 .latest-news-area .single-news .image {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   position: relative;
-  border-radius: 4px;
   overflow: hidden;
 }
 
