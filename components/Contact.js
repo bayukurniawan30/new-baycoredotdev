@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Row, Col, Alert, Form } from 'react-bootstrap'
-import ReCAPTCHA from "react-google-recaptcha"
-import { useForm } from "react-hook-form"
+import ReCAPTCHA from 'react-google-recaptcha'
+import { useForm } from 'react-hook-form'
+import emailjs from 'emailjs-com'
 import "../lib/FontAwesome"
 
 export default function Contact({...pageProps}) {
     const phone   = pageProps.data.phone
     const waPhone = phone.replace("+", "")
 
-    const { register, handleSubmit, errors } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const [message, setMessage] = useState(false);
-    const [button, setButton]   = useState(false);
+    const [validated, setValidated] = useState(false);
+    const [message, setMessage]     = useState(false);
+    const [button, setButton]       = useState(false);
     const [recaptchaValue, setRecaptchaValue] = useState(false);
 
     function onChange(value) {
@@ -25,16 +27,18 @@ export default function Contact({...pageProps}) {
         }
         else {
             console.log(recaptchaValue)
-            setButton(pageProps.data.buttonLoadingText)
+            setButton(<span><FontAwesomeIcon icon={['fas', 'circle-notch']} size="sm" spin /> {pageProps.data.buttonLoadingText}</span>)
 
             emailjs.sendForm(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID, "#contact-form", process.env.EMAILJS_USER_ID)
             .then((result) => {
-                setMessage(<article className="message is-success mt-5"><div className="message-body">Your message has been sent. We will get back in touch with you soon!</div></article>)
-                setButton("SEND MESSAGE")
+                setMessage(<Alert variant="success" className="mt-3">Your message has been sent. We will get back in touch with you soon!</Alert>)
+                setButton(pageProps.data.buttonText)
             }, (error) => {
-                setMessage(<article className="message is-danger mt-5"><div className="message-body">{error}</div></article>)
-                setButton("SEND MESSAGE")
+                setMessage(<Alert variant="danger" className="mt-3">{error}</Alert>)
+                setButton(pageProps.data.buttonText)
             });
+
+            setValidated(true);
         }
     }
 
@@ -78,42 +82,69 @@ export default function Contact({...pageProps}) {
                         </Col>
                         <Col lg={7}>
                             <div className="form-main">
-                                <Form className="form" method="post" onSubmit={handleSubmit(onSubmit)}>
-                                    <div className="row">
-                                        <div className="col-lg-6 col-12">
+                                <Form id="contact-form" className="form" method="post" noValidate validated={validated} onSubmit={handleSubmit(onSubmit)}>
+                                    <Row>
+                                        <Col lg={6}>
                                             <div className="form-group">
-                                                <Form.Control ref={register({required: true, minLength: 3})}
-                                                    name="name" 
-                                                    className={errors.message && 'is-danger'}
+                                                <Form.Control {...register("from_name", { required: true, maxLength: 3, maxLength: 30 })}
+                                                    name="from_name" 
+                                                    className={errors.from_name && 'is-danger'}
                                                     type="text" 
                                                     placeholder={pageProps.data.formNamePlaceholder} 
-                                                    required="required" />
+                                                     />
+                                                { errors.from_name &&
+                                                    <Form.Text className="text-danger">
+                                                        { errors.from_name?.type === "required" && "Name is required" }
+                                                        { errors.from_name?.type === "minLength" && "Min length of name is 3 characters" }
+                                                    </Form.Text>
+                                                }
                                             </div>
-                                        </div>
-                                        <div className="col-lg-6 col-12">
+                                        </Col>
+                                        <Col lg={6}>
                                             <div className="form-group">
-                                                <Form.Control ref={register({required: true, pattern: /^\S+@\S+$/i})}
-                                                    name="email" 
-                                                    className={errors.message && 'is-danger'}
+                                                <Form.Control {...register("from_email", { required: true, pattern: /^\S+@\S+$/i })}
+                                                    name="from_email" 
+                                                    className={errors.from_email && 'is-danger'}
                                                     type="email" 
                                                     placeholder={pageProps.data.formEmailPlaceholder}
-                                                    required="required" />
+                                                     />
+
+                                                { errors.from_email &&
+                                                    <Form.Text className="text-danger">
+                                                        { errors.from_email?.type === "required" && "Email is required" }
+                                                        { errors.from_email?.type === "pattern" && "Please use a valid email</p>" }
+                                                    </Form.Text>
+                                                }
                                             </div>
-                                        </div>
-                                        <div className="col-12">
+                                        </Col>
+                                        <Col>
                                             <div className="form-group message">
-                                                <Form.Control as="textarea" ref={register({required: true, minLength: 5})}
+                                                <Form.Control as="textarea" {...register("message", { required: true, minLength: 5 })}
                                                     name="message" 
                                                     className={errors.message && 'is-danger'}
                                                     placeholder={pageProps.data.formMessagePlaceholder} />
+
+                                                { errors.message &&
+                                                    <Form.Text className="text-danger">
+                                                        { errors.message?.type === "required" && "Message is required" }
+                                                        { errors.message?.type === "minLength" && "Min length of message is 5 characters" }
+                                                    </Form.Text>
+                                                }
                                             </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="form-group button">
-                                                <button type="submit" className="btn ">{pageProps.data.buttonText}</button>
+                                        </Col>
+                                        <ReCAPTCHA
+                                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY}
+                                            onChange={onChange}
+                                        />
+                                        <Col>
+                                            <div className="form-group button mt-3">
+                                                <button type="submit" className="btn">{!button ? pageProps.data.buttonText : button}</button>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </Col>
+                                        <Col>
+                                            {message}
+                                        </Col>
+                                    </Row>
                                 </Form>
                             </div>
                         </Col>

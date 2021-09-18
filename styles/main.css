@@ -4975,6 +4975,10 @@ blockquote span {
   display: block;
 }
 
+.is-danger {
+  border-color: rgb(220,53,69)!important;
+}
+
 .contact-us .form .form-group input {
   height: 55px;
   line-height: 55px;
