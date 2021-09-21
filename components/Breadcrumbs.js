@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
 
 export default function Breadcrumbs({ ...pageProps }) {
@@ -10,7 +11,7 @@ export default function Breadcrumbs({ ...pageProps }) {
                             <h1 className="page-title">{pageProps.title}</h1>
                         </div>
                         <ul className="breadcrumb-nav">
-                            <li><a href="index.html">Home</a></li>
+                            <li><Link href="/"><a>Home</a></Link></li>
                             <li>{pageProps.title}</li>
                         </ul>
                     </Col>

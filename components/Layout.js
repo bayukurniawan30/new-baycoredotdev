@@ -9,7 +9,7 @@ export default function Layout({children, ...pageProps}) {
                 <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
                 <meta name="author" content="Bayu Kurniawan" />
                 <meta name="description" content={pageProps.data.description} />
-                <meta name="keywords" content />
+                <meta name="keywords" content={pageProps.data.keywords} />
                 <meta name='application-name' content={pageProps.metaTagsData.applicationName} />
                 <meta name='apple-mobile-web-app-capable' content='yes' />
                 <meta name='apple-mobile-web-app-status-bar-style' content='default' />

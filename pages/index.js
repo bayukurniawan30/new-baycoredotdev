@@ -33,6 +33,7 @@ export async function getServerSideProps() {
 	const data = {
 		siteName: websiteInformation.data.sitename.value,
 		description: websiteInformation.data.description.value,
+		keywords: websiteInformation.data.keywords.value,
 		logo: websiteInformation.data.logo.value.full_path,
 		favicon: websiteInformation.data.favicon.value.full_path
 	}

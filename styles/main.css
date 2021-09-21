@@ -12,6 +12,14 @@ html {
   scroll-behavior: smooth;
 }
 
+#nprogress .bar {
+  background: #a18cd1!important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #a18cd1, 0 0 5px #a18cd1;
+}
+
 body {
   font-family: "Spartan", sans-serif;
   font-weight: normal;
@@ -849,10 +857,10 @@ ol {
 
 /* Bread Crumbs */
 .breadcrumbs {
-  background-color: #081828;
+  background-color: #180e2d;
   position: relative;
-  padding: 100px 0;
-  padding-top: 180px;
+  padding: 80px 0;
+  padding-top: 150px;
 }
 
 .breadcrumbs .breadcrumbs-content {
@@ -2753,6 +2761,12 @@ ol {
   padding: 0px 30px 15px;
 }
 
+.latest-news-area small.time svg {
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+}
+
 .latest-news-area .single-news .image {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -2865,6 +2879,10 @@ ol {
   margin-top: 40px;
 }
 
+.post-details a {
+  color: #a18cd1;
+}
+
 .post-details .post-thumbnils {
   margin-bottom: 30px;
 }
@@ -2914,7 +2932,12 @@ ul.custom-flex {
 
 .post-details p {
   font-size: 15px;
-  margin: 40px 0;
+  margin: 20px 0;
+}
+
+.post-content ul {
+  list-style: disc;
+  padding-left: 30px;
 }
 
 .post-details h3 {
@@ -3037,6 +3060,7 @@ blockquote span {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-top: 50px;
   margin-bottom: 30px;
 }
 
@@ -3089,7 +3113,7 @@ blockquote span {
 }
 
 .post-details .post-tags-media .post-social-media {
-  text-align: right;
+  text-align: left;
 }
 
 .post-details .post-tags-media .post-social-media ul {

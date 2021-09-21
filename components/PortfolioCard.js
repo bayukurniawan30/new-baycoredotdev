@@ -6,7 +6,7 @@ export default function PortfolioCard({...pageProps}) {
         <Col lg={4} md={6}>
             <div data-aos="fade-up" data-aos-delay="200" className="single-news">
                 <div className="image">
-                    <a href={pageProps.data.link.value.url}>
+                    <a href={pageProps.data.link.value.url} target="_blank">
                         <Image
                             src={pageProps.data.thumbnail.value.full_path}
                             alt={pageProps.data.title.value}
@@ -19,7 +19,7 @@ export default function PortfolioCard({...pageProps}) {
                     </div>
                 </div>
                 <div className="content-body text-center">
-                    <h4 className="title"><a href={pageProps.data.link.value.url}>{pageProps.data.title.value}</a></h4>
+                    <h4 className="title"><a href={pageProps.data.link.value.url} target="_blank">{pageProps.data.title.value}</a></h4>
                 </div>
             </div>
         </Col>
