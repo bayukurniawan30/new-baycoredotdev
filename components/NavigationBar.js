@@ -55,9 +55,23 @@ function NavigationBar({...pageProps}) {
                                         }
                                     })()}
                                 </Navbar.Collapse>
-                                <div className="button">
-                                    <ScrollLink to="contact-us" spy={true} smooth={false} className="btn"><FontAwesomeIcon icon={['far', 'envelope']} size="sm" /> Contact Me</ScrollLink>
-                                </div>
+
+                                {(() => {
+                                    if (router.pathname == '/'){
+                                        return (
+                                            <div className="button">
+                                                <ScrollLink to="contact-us" spy={true} smooth={false} className="btn"><FontAwesomeIcon icon={['far', 'envelope']} size="sm" /> Contact Me</ScrollLink>
+                                            </div>
+                                        )    
+                                    }
+                                    else {
+                                        return (
+                                            <div className="button">
+                                                <Link href="/#contact-us"><ScrollLink to="contact-us" spy={true} smooth={false} className="btn"><FontAwesomeIcon icon={['far', 'envelope']} size="sm" /> Contact Me</ScrollLink></Link>
+                                            </div>
+                                        )
+                                    }
+                                })()}
                             </Navbar>
                         </div>
                     </div>

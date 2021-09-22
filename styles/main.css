@@ -52,6 +52,10 @@ button:focus,
   outline: none;
 }
 
+.navbar-light .navbar-toggler {
+  border-color: transparent;
+}
+
 span,
 a {
   display: inline-block;

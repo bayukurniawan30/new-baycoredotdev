@@ -8,7 +8,7 @@ import "../lib/FontAwesome"
 export default function BlogCard({...pageProps}) {
     return (
         <Col lg={6} md={6}>
-            <div data-aos="fade-up" data-aos-delay="200" className="single-news">
+            <div className="single-news">
                 <div className="image">
                     <Link href={`/blog/${pageProps.data.slug}`}>
                         <a>
@@ -17,6 +17,8 @@ export default function BlogCard({...pageProps}) {
                                 alt={pageProps.data.title.value}
                                 width={800}
                                 height={453}
+                                placeholder="blur"
+                                blurDataURL={pageProps.data.thumbnail.value.base64.thumbnail['480x270']}
                             />
                         </a>
                     </Link>

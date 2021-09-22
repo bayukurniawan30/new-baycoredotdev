@@ -86,6 +86,8 @@ export default function AboutMe({...pageProps}) {
                                 width={517}
                                 height={541}
                                 quality={100}
+                                placeholder="blur"
+                                blurDataURL={pageProps.data.imageBase64}
                             />
                         </div>
                     </Col>

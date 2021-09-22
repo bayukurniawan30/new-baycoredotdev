@@ -71,7 +71,8 @@ export async function getServerSideProps() {
 		mainTitle: aboutSection.data.main_title.value,
 		secondaryTitle: aboutSection.data.secondary_title.value,
 		description: await markdownToHtml(aboutSection.data.description.value),
-		image: aboutSection.data.image.value.full_path
+		image: aboutSection.data.image.value.full_path,
+		imageBase64: aboutSection.data.image.value.base64.full_path,
 	}
 
 	const pgSkillsData = {
@@ -99,7 +100,8 @@ export async function getServerSideProps() {
 		secondaryTitle: youtubeSection.data.secondary_title.value,
 		description: youtubeSection.data.description.value,
 		youtubeLink: youtubeSection.data.youtube_link.value.url,
-		banner: youtubeSection.data.banner.value.full_path
+		banner: youtubeSection.data.banner.value.full_path,
+		bannerBase64: youtubeSection.data.banner.value.base64.full_path
 	}
 
 	const portfoliosSectionData = {

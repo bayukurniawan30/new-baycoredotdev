@@ -8,8 +8,8 @@ export default function Layout({children, ...pageProps}) {
             <Head>
                 <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover' />
                 <meta name="author" content="Bayu Kurniawan" />
-                <meta name="description" content={pageProps.data.description} />
-                <meta name="keywords" content={pageProps.data.keywords} />
+                <meta name="description" content={pageProps.data.description} key="description" />
+                <meta name="keywords" content={pageProps.data.keywords} key="keywords" />
                 <meta name='application-name' content={pageProps.metaTagsData.applicationName} />
                 <meta name='apple-mobile-web-app-capable' content='yes' />
                 <meta name='apple-mobile-web-app-status-bar-style' content='default' />
@@ -20,20 +20,20 @@ export default function Layout({children, ...pageProps}) {
                 <link rel='apple-touch-icon' sizes='180x180' href={pageProps.metaTagsData.appleTouchIcon} />
                 <link rel='manifest' href='/manifest.json' />
                 <meta name="og:locale" content={pageProps.metaTagsData.ogLocale} />
-                <meta name="og:title" content={pageProps.data.siteName} />
-                <meta name="og:type" content={pageProps.metaTagsData.ogType} />
-                <meta name="og:image" content={pageProps.data.logo} />
-                <meta name="og:url" content={pageProps.metaTagsData.webUrl} />
-                <meta name="og:description" content={pageProps.data.description} />
+                <meta name="og:title" content={pageProps.data.siteName} key="og:title" />
+                <meta name="og:type" content={pageProps.metaTagsData.ogType} key="og:type" />
+                <meta name="og:image" content={pageProps.data.logo} key="og:image" />
+                <meta name="og:url" content={pageProps.metaTagsData.webUrl} key="og:url" />
+                <meta name="og:description" content={pageProps.data.description} key="og:description" />
                 <meta name="og:site_name" content={pageProps.data.siteName} />
-                <meta name="twitter:card" content="summary" />
-                <meta name="twitter:url" content={pageProps.metaTagsData.webUrl} />
-                <meta name="twitter:title" content={pageProps.data.siteName} />
-                <meta name="twitter:description" content={pageProps.data.description} />
-                <meta name="twitter:image" content={pageProps.data.logo} />
-                <link rel="canonical" href={pageProps.metaTagsData.webUrl} />
+                <meta name="twitter:card" content="summary" key="twitter:card" />
+                <meta name="twitter:url" content={pageProps.metaTagsData.webUrl} key="twitter:url" />
+                <meta name="twitter:title" content={pageProps.data.siteName} key="twitter:title" />
+                <meta name="twitter:description" content={pageProps.data.description} key="twitter:description" />
+                <meta name="twitter:image" content={pageProps.data.logo} key="twitter:image" />
+                <link rel="canonical" href={pageProps.metaTagsData.webUrl} key="canonical" />
                 <meta charSet="utf-8" />
-                <title>{pageProps.data.siteName}</title>
+                <title key="title">{pageProps.data.siteName}</title>
                 <link rel="shortcut icon" href={pageProps.data.favicon} />
                 <link href='https://fonts.googleapis.com/css?family=Raleway:200,300,400,700,900,800' rel='stylesheet' type='text/css' />
                 <link href='https://fonts.googleapis.com/css?family=Roboto:200,300,400,900,700,500,300' rel='stylesheet' type='text/css' />

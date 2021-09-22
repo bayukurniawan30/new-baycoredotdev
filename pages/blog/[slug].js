@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head'
 import Image from "next/image"
 import { getSingletonData, getCollectionData, getCollectionDataDetails } from "../../lib/api";
 import { Container, Row, Col } from 'react-bootstrap'
@@ -8,14 +7,15 @@ import Moment from 'react-moment'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import BlogWidgetRecentPosts from "../../components/BlogWidgetRecentPosts"
 import SocialShare from "../../components/SocialShare"
+import DynamicMetaTags from "../../components/DynamicMetaTags"
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ params, res}) {
     const websiteInformation = (await getSingletonData('website-information'))
 	const metaTags           = (await getSingletonData('meta-tags'))
     const contactSection     = (await getSingletonData('contact-section'))
 	const footer             = (await getSingletonData('footer'))
 
-	const blog               = (await getCollectionDataDetails('blogs/meet-purple-cms-a-content-management-system-based-on-cakephp-3'))
+	const blog               = (await getCollectionDataDetails(`blogs/${params.slug}`))
 	const recentPost         = (await getCollectionData('blogs', 'created', 'desc', null, 5))
 	const socialMedia        = (await getCollectionData('social-media'))
 
@@ -83,16 +83,18 @@ export default class IndexPage extends React.Component {
         this.pageTitle = "Blog"
         this.blog      = this.pageProps.blogData.blog
         this.content   = this.pageProps.blogData.blogContent
+        this.meta      = {
+            title: this.blog.title.value,
+            description: this.blog.excerpt.value,
+            image: this.blog.thumbnail.value.full_path,
+            keywords: this.blog.keywords.value,
+        }
     }
 
     render() {
-        console.log(this.pageProps.blogData.asd)
         return (
 			<div>
-                <Head>
-                    <title>{this.pageTitle} - {this.pageProps.data.siteName}</title>
-                </Head>
-
+                <DynamicMetaTags data={this.meta}></DynamicMetaTags>
                 <Breadcrumbs title={this.pageTitle}></Breadcrumbs>
 
                 <div className="section blog-single">
@@ -106,6 +108,8 @@ export default class IndexPage extends React.Component {
                                         layout="responsive"
                                         width={800}
                                         height={453}
+                                        placeholder="blur"
+                                        blurDataURL={this.blog.thumbnail.value.base64.full_path}
                                     />
                                     <div className="author">
                                         <span>{this.blog.author.value}</span>

@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Row, Col } from 'react-bootstrap'
 import "../lib/FontAwesome"
@@ -44,7 +45,7 @@ export default function Footer({...pageProps}) {
                             <div className="single-footer f-link">
                                 <h3>{pageProps.data.secondColumnTitle}</h3>
                                 <ul>
-                                    <li><a href="#" target="_blank">Blog</a></li>
+                                    <li><Link href="/blog"><a>Blog</a></Link></li>
                                     <li><a href="https://host.codewithbaycore.dev" target="_blank">Host.cwb</a></li>
                                 </ul>
                             </div>

@@ -12,6 +12,8 @@ export default function YoutubeChannel({...pageProps}) {
                 layout="fill"
                 objectFit="cover"
                 quality={100}
+                placeholder="blur"
+                blurDataURL={pageProps.data.bannerBase64}
             />
             <Container>
                 <Row>

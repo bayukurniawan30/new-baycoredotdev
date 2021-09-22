@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap'
 export default function PortfolioCard({...pageProps}) {
     return (
         <Col lg={4} md={6}>
-            <div data-aos="fade-up" data-aos-delay="200" className="single-news">
+            <div className="single-news">
                 <div className="image">
                     <a href={pageProps.data.link.value.url} target="_blank">
                         <Image
@@ -12,6 +12,8 @@ export default function PortfolioCard({...pageProps}) {
                             alt={pageProps.data.title.value}
                             width={800}
                             height={453}
+                            placeholder="blur"
+                            blurDataURL={pageProps.data.thumbnail.value.base64.full_path}
                         />
                     </a>
                     <div className="meta-details">
